@@ -2,16 +2,45 @@ package org.example;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.HashMap;
+import java.util.Map;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        StudentManager manager = new StudentManager();
+        Map<Integer, String> students = new HashMap<>();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        // Valid input
+        manager.addStudent(students, 1, "Aline");
+        manager.addStudent(students, 2, "IGABE");
+
+        // Invalid input
+        manager.addStudent(students, -3, "Tristan"); // Invalid ID
+        manager.addStudent(students, 4, "");          // Empty name
+
+        // Null map (invalid)
+        manager.addStudent(null, 5, "Teta");
+
+        // Sorting
+        manager.sortStudents(students);
+
+        // Searching
+        manager.searchStudent(students, 1); // Valid
+        manager.searchStudent(students, 10); // Not found
+        manager.searchStudent(null, 2); // Null map
+
+        // Removing
+        manager.removeStudent(students, 2); // Valid
+        manager.removeStudent(students, 5); // Not found
+        manager.removeStudent(null, 1);     // Null map
+
+        // Highest and Lowest
+        manager.findStudentWithHighestId(students);
+        manager.findStudentWithLowestId(students);
+
+        // Edge case: Empty map
+        Map<Integer, String> emptyMap = new HashMap<>();
+        manager.findStudentWithHighestId(emptyMap);
+        manager.findStudentWithLowestId(emptyMap);
     }
 }
