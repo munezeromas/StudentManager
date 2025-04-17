@@ -6,7 +6,7 @@ public class StudentManager {
 
     public void addStudent(Map<Integer, String> students, int studentId, String name) {
         if (students == null) {
-            System.out.println("No student list found.");
+            System.out.println("No student list found here.");
             return;
         }
         if (studentId <= 0 || name == null || name.trim().isEmpty()) {
@@ -19,7 +19,7 @@ public class StudentManager {
 
     public void sortStudents(Map<Integer, String> students) {
         if (students == null) {
-            System.out.println("No student list to sort.");
+            System.out.println("No student list be sorted please!");
             return;
         }
         TreeMap<Integer, String> sorted = new TreeMap<>(students);
