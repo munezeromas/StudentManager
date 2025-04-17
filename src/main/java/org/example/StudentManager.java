@@ -5,83 +5,72 @@ import java.util.*;
 public class StudentManager {
 
     public void addStudent(Map<Integer, String> students, int studentId, String name) {
-        try {
-            if (studentId <= 0) {
-                throw new IllegalArgumentException("Student ID must be positive.");
-            }
-            if (name == null || name.trim().isEmpty()) {
-                throw new IllegalArgumentException("Student name cannot be empty.");
-            }
-            students.put(studentId, name);
-            System.out.println("Student added: ID = " + studentId + ", Name = " + name);
-        } catch (NullPointerException e) {
-            System.out.println("Error: Student map is null.");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
+        if (students == null) {
+            System.out.println("No student list found.");
+            return;
         }
+        if (studentId <= 0 || name == null || name.trim().isEmpty()) {
+            System.out.println("Invalid student info.");
+            return;
+        }
+        students.put(studentId, name);
+        System.out.println("Added: ID = " + studentId + ", Name = " + name);
     }
 
     public void sortStudents(Map<Integer, String> students) {
-        try {
-            TreeMap<Integer, String> sorted = new TreeMap<>(students);
-            System.out.println("Sorted students:");
-            for (Map.Entry<Integer, String> entry : sorted.entrySet()) {
-                System.out.println("ID = " + entry.getKey() + ", Name = " + entry.getValue());
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Error: Cannot sort null map.");
+        if (students == null) {
+            System.out.println("No student list to sort.");
+            return;
+        }
+        TreeMap<Integer, String> sorted = new TreeMap<>(students);
+        System.out.println("Sorted students:");
+        for (Map.Entry<Integer, String> entry : sorted.entrySet()) {
+            System.out.println("ID = " + entry.getKey() + ", Name = " + entry.getValue());
         }
     }
 
     public void searchStudent(Map<Integer, String> students, int studentId) {
-        try {
-            if (students.containsKey(studentId)) {
-                System.out.println("Student found: ID = " + studentId + ", Name = " + students.get(studentId));
-            } else {
-                System.out.println("Student with ID " + studentId + " not found.");
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Error: Cannot search in null map.");
+        if (students == null) {
+            System.out.println("No student list to search.");
+            return;
+        }
+        if (students.containsKey(studentId)) {
+            System.out.println("Found: ID = " + studentId + ", Name = " + students.get(studentId));
+        } else {
+            System.out.println("ID " + studentId + " not found.");
         }
     }
 
     public void removeStudent(Map<Integer, String> students, int studentId) {
-        try {
-            if (students.containsKey(studentId)) {
-                students.remove(studentId);
-                System.out.println("Student removed: ID = " + studentId);
-            } else {
-                System.out.println("Student with ID " + studentId + " does not exist.");
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Error: Cannot remove from null map.");
+        if (students == null) {
+            System.out.println("No student list to remove from.");
+            return;
+        }
+        if (students.containsKey(studentId)) {
+            students.remove(studentId);
+            System.out.println("Removed: ID = " + studentId);
+        } else {
+            System.out.println("ID " + studentId + " not found.");
         }
     }
 
     public void findStudentWithHighestId(Map<Integer, String> students) {
-        try {
-            if (students.isEmpty()) {
-                System.out.println("No students available.");
-                return;
-            }
-            Integer highestId = Collections.max(students.keySet());
-            System.out.println("Student with highest ID: ID = " + highestId + ", Name = " + students.get(highestId));
-        } catch (NullPointerException e) {
-            System.out.println("Error: Cannot find in null map.");
+        if (students == null || students.isEmpty()) {
+            System.out.println("No students found.");
+            return;
         }
+        int maxId = Collections.max(students.keySet());
+        System.out.println("Highest ID: " + maxId + ", Name = " + students.get(maxId));
     }
 
     public void findStudentWithLowestId(Map<Integer, String> students) {
-        try {
-            if (students.isEmpty()) {
-                System.out.println("No students available.");
-                return;
-            }
-            Integer lowestId = Collections.min(students.keySet());
-            System.out.println("Student with lowest ID: ID = " + lowestId + ", Name = " + students.get(lowestId));
-        } catch (NullPointerException e) {
-            System.out.println("Error: Cannot find in null map.");
+        if (students == null || students.isEmpty()) {
+            System.out.println("No students found.");
+            return;
         }
+        int minId = Collections.min(students.keySet());
+        System.out.println("Lowest ID: " + minId + ", Name = " + students.get(minId));
     }
 }
+
 
